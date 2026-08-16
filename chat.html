@@ -4,432 +4,390 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>JIL AI — Chat</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+:root{
+    --bg:#07070b;
+    --panel:#0d0d14;
+    --purple:#8b5cf6;
+    --purple2:#6d28d9;
+    --text:#f5f3ff;
+    --muted:#9292a7;
+    --border:rgba(255,255,255,.08);
 }
 
-:root {
-    --bg: #07070b;
-    --panel: #0d0d14;
-    --panel2: #13131d;
-    --purple: #8b5cf6;
-    --purple2: #6d28d9;
-    --text: #f5f3ff;
-    --muted: #9292a7;
-    --border: rgba(255,255,255,.08);
-}
-
-body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    font-family: Inter, Arial, sans-serif;
-    color: var(--text);
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
     background:
-        radial-gradient(circle at 10% 0%, rgba(139,92,246,.20), transparent 30%),
-        radial-gradient(circle at 90% 100%, rgba(109,40,217,.15), transparent 35%),
+        radial-gradient(circle at 10% 0%,rgba(139,92,246,.2),transparent 30%),
+        radial-gradient(circle at 90% 100%,rgba(109,40,217,.15),transparent 35%),
         var(--bg);
 }
 
-/* APP */
-
-.app {
-    height: 100vh;
-    display: flex;
+.app{
+    height:100vh;
+    display:flex;
 }
 
-/* SIDEBAR */
-
-.sidebar {
-    width: 270px;
-    background: rgba(9,9,14,.88);
-    border-right: 1px solid var(--border);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    backdrop-filter: blur(20px);
+.sidebar{
+    width:270px;
+    background:rgba(9,9,14,.9);
+    border-right:1px solid var(--border);
+    padding:20px;
+    display:flex;
+    flex-direction:column;
 }
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 22px;
-    font-weight: 800;
-    margin-bottom: 25px;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:25px;
 }
 
-.logo {
-    width: 38px;
-    height: 38px;
-    display: grid;
-    place-items: center;
-    border-radius: 12px;
-    background: linear-gradient(135deg,var(--purple),var(--purple2));
-    box-shadow: 0 0 25px rgba(139,92,246,.35);
+.logo{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--purple),var(--purple2));
+    box-shadow:0 0 25px rgba(139,92,246,.35);
 }
 
-.brand span {
-    color: #a78bfa;
+.brand span{
+    color:#a78bfa;
 }
 
-.new-chat {
-    border: 1px solid var(--border);
-    background: linear-gradient(135deg,#181521,#111119);
-    color: white;
-    padding: 13px;
-    border-radius: 13px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: .2s;
+.new-chat{
+    border:1px solid var(--border);
+    background:#181521;
+    color:white;
+    padding:13px;
+    border-radius:13px;
+    cursor:pointer;
+    font-size:14px;
 }
 
-.new-chat:hover {
-    transform: translateY(-2px);
-    border-color: rgba(139,92,246,.5);
-    background: #1a1724;
+.new-chat:hover{
+    background:#211b2d;
+    border-color:rgba(139,92,246,.5);
 }
 
-.history-title {
-    margin: 28px 5px 10px;
-    color: #69697d;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.history-title{
+    margin:28px 5px 10px;
+    color:#69697d;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
 }
 
-.history {
-    overflow-y: auto;
-    flex: 1;
+.history{
+    overflow-y:auto;
 }
 
-.history-item {
-    padding: 10px;
-    border-radius: 9px;
-    color: #b7b7c7;
-    font-size: 13px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.history-item{
+    padding:10px;
+    border-radius:9px;
+    color:#b7b7c7;
+    font-size:13px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 
-.history-item:hover {
-    background: #171720;
+.history-item:hover{
+    background:#171720;
 }
 
-/* MAIN */
-
-.main {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
+.main{
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
 }
 
-/* HEADER */
-
-.header {
-    height: 70px;
-    padding: 0 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    background: rgba(7,7,11,.65);
-    backdrop-filter: blur(20px);
+.header{
+    height:70px;
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border);
+    background:rgba(7,7,11,.7);
+    backdrop-filter:blur(20px);
 }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.jil-avatar {
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    border-radius: 13px;
-    background: linear-gradient(135deg,#8b5cf6,#4c1d95);
-    box-shadow: 0 0 20px rgba(139,92,246,.3);
+.jil-avatar{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:13px;
+    background:linear-gradient(135deg,#8b5cf6,#4c1d95);
+    box-shadow:0 0 20px rgba(139,92,246,.3);
 }
 
-.title {
-    font-weight: 700;
+.title{
+    font-weight:bold;
 }
 
-.status {
-    color: #6ee7b7;
-    font-size: 11px;
-    margin-top: 3px;
+.status{
+    color:#6ee7b7;
+    font-size:11px;
+    margin-top:3px;
 }
 
-.home {
-    color: #9696a8;
-    text-decoration: none;
-    font-size: 13px;
+.home{
+    color:#9696a8;
+    text-decoration:none;
+    font-size:13px;
 }
 
-.home:hover {
-    color: white;
+.home:hover{
+    color:white;
 }
 
-/* MESSAGES */
-
-.messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 35px 20px;
-    scroll-behavior: smooth;
+.messages{
+    flex:1;
+    overflow-y:auto;
+    padding:35px 20px;
+    scroll-behavior:smooth;
 }
 
-.welcome {
-    max-width: 700px;
-    margin: 70px auto;
-    text-align: center;
+.welcome{
+    max-width:700px;
+    margin:70px auto;
+    text-align:center;
 }
 
-.welcome-orb {
-    width: 90px;
-    height: 90px;
-    margin: auto;
-    display: grid;
-    place-items: center;
-    border-radius: 28px;
-    font-size: 43px;
-    background: linear-gradient(135deg,#8b5cf6,#4c1d95);
-    box-shadow:
-        0 0 35px rgba(139,92,246,.35),
-        inset 0 0 20px rgba(255,255,255,.08);
-    animation: float 3s ease-in-out infinite;
+.welcome-orb{
+    width:90px;
+    height:90px;
+    margin:auto;
+    display:grid;
+    place-items:center;
+    border-radius:28px;
+    font-size:43px;
+    background:linear-gradient(135deg,#8b5cf6,#4c1d95);
+    box-shadow:0 0 35px rgba(139,92,246,.35);
+    animation:float 3s ease-in-out infinite;
 }
 
-@keyframes float {
-    50% {
-        transform: translateY(-8px);
+@keyframes float{
+    50%{transform:translateY(-8px)}
+}
+
+.welcome h1{
+    font-size:34px;
+    margin:22px 0 10px;
+}
+
+.welcome p{
+    color:var(--muted);
+}
+
+.message{
+    max-width:850px;
+    margin:18px auto;
+    display:flex;
+    gap:10px;
+    animation:appear .25s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(8px);
     }
 }
 
-.welcome h1 {
-    font-size: 34px;
-    margin: 22px 0 10px;
+.message.user{
+    justify-content:flex-end;
 }
 
-.welcome p {
-    color: var(--muted);
+.avatar{
+    width:32px;
+    height:32px;
+    flex:0 0 32px;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    background:#191923;
 }
 
-/* MESSAGE */
-
-.message {
-    max-width: 850px;
-    margin: 18px auto;
-    display: flex;
-    gap: 10px;
-    animation: appear .25s ease;
+.message.user .avatar{
+    order:2;
+    background:linear-gradient(135deg,#7c3aed,#8b5cf6);
 }
 
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
+.content{
+    max-width:75%;
+}
+
+.bubble{
+    padding:13px 16px;
+    border-radius:17px;
+    line-height:1.6;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+
+.message.jil .bubble{
+    background:rgba(20,20,29,.92);
+    border:1px solid var(--border);
+}
+
+.message.user .bubble{
+    background:linear-gradient(135deg,#6d28d9,#8b5cf6);
+}
+
+.time{
+    margin-top:5px;
+    color:#666679;
+    font-size:10px;
+}
+
+.thinking{
+    display:flex;
+    gap:5px;
+    padding:4px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#a78bfa;
+    animation:bounce 1.2s infinite;
+}
+
+.dot:nth-child(2){
+    animation-delay:.15s;
+}
+
+.dot:nth-child(3){
+    animation-delay:.3s;
+}
+
+@keyframes bounce{
+    0%,60%,100%{
+        transform:translateY(0);
+        opacity:.4;
+    }
+    30%{
+        transform:translateY(-5px);
+        opacity:1;
     }
 }
 
-.message.user {
-    justify-content: flex-end;
+.input-area{
+    padding:15px 20px 25px;
 }
 
-.avatar {
-    width: 32px;
-    height: 32px;
-    flex: 0 0 32px;
-    display: grid;
-    place-items: center;
-    border-radius: 10px;
-    background: #191923;
-    font-size: 16px;
+.input-box{
+    max-width:850px;
+    margin:auto;
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+    padding:8px;
+    border:1px solid rgba(139,92,246,.18);
+    border-radius:20px;
+    background:rgba(18,18,27,.92);
 }
 
-.message.user .avatar {
-    order: 2;
-    background: linear-gradient(135deg,#7c3aed,#8b5cf6);
+.input-box:focus-within{
+    border-color:rgba(139,92,246,.6);
+    box-shadow:0 0 35px rgba(139,92,246,.12);
 }
 
-.content {
-    max-width: 75%;
+textarea{
+    flex:1;
+    min-height:45px;
+    max-height:150px;
+    resize:none;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:white;
+    padding:12px;
+    font-family:inherit;
+    font-size:15px;
 }
 
-.bubble {
-    padding: 13px 16px;
-    border-radius: 17px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+textarea::placeholder{
+    color:#666679;
 }
 
-.message.jil .bubble {
-    background: rgba(20,20,29,.92);
-    border: 1px solid var(--border);
+.icon{
+    width:44px;
+    height:44px;
+    border:0;
+    border-radius:13px;
+    background:#20202b;
+    color:white;
+    cursor:pointer;
+    font-size:17px;
 }
 
-.message.user .bubble {
-    background: linear-gradient(135deg,#6d28d9,#8b5cf6);
+.icon:hover{
+    background:#2b2b39;
 }
 
-.time {
-    margin-top: 5px;
-    color: #666679;
-    font-size: 10px;
+.send{
+    background:linear-gradient(135deg,#8b5cf6,#6d28d9);
 }
 
-/* THINKING */
-
-.thinking {
-    display: flex;
-    gap: 5px;
-    padding: 4px;
+.footer-note{
+    text-align:center;
+    color:#555566;
+    font-size:10px;
+    margin-top:8px;
 }
 
-.dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #a78bfa;
-    animation: bounce 1.2s infinite;
-}
-
-.dot:nth-child(2) {
-    animation-delay: .15s;
-}
-
-.dot:nth-child(3) {
-    animation-delay: .3s;
-}
-
-@keyframes bounce {
-    0%,60%,100% {
-        transform: translateY(0);
-        opacity: .4;
+@media(max-width:700px){
+    .sidebar{
+        display:none;
     }
 
-    30% {
-        transform: translateY(-5px);
-        opacity: 1;
-    }
-}
-
-/* INPUT */
-
-.input-area {
-    padding: 15px 20px 25px;
-}
-
-.input-box {
-    max-width: 850px;
-    margin: auto;
-    display: flex;
-    align-items: flex-end;
-    gap: 8px;
-    padding: 8px;
-    border: 1px solid rgba(139,92,246,.18);
-    border-radius: 20px;
-    background: rgba(18,18,27,.92);
-    box-shadow: 0 10px 40px rgba(0,0,0,.25);
-    transition: .2s;
-}
-
-.input-box:focus-within {
-    border-color: rgba(139,92,246,.6);
-    box-shadow: 0 0 35px rgba(139,92,246,.12);
-}
-
-textarea {
-    flex: 1;
-    min-height: 45px;
-    max-height: 150px;
-    resize: none;
-    border: 0;
-    outline: 0;
-    background: transparent;
-    color: white;
-    padding: 12px;
-    font-family: inherit;
-    font-size: 15px;
-}
-
-textarea::placeholder {
-    color: #666679;
-}
-
-.icon {
-    width: 44px;
-    height: 44px;
-    border: 0;
-    border-radius: 13px;
-    background: #20202b;
-    color: white;
-    cursor: pointer;
-    font-size: 17px;
-    transition: .2s;
-}
-
-.icon:hover {
-    background: #2b2b39;
-    transform: translateY(-2px);
-}
-
-.send {
-    background: linear-gradient(135deg,#8b5cf6,#6d28d9);
-    box-shadow: 0 5px 20px rgba(139,92,246,.25);
-}
-
-.send:hover {
-    background: linear-gradient(135deg,#9d75ff,#7c3aed);
-}
-
-.footer-note {
-    text-align: center;
-    color: #555566;
-    font-size: 10px;
-    margin-top: 8px;
-}
-
-/* MOBILE */
-
-@media(max-width:700px) {
-
-    .sidebar {
-        display: none;
+    .header{
+        padding:0 15px;
     }
 
-    .header {
-        padding: 0 15px;
+    .messages{
+        padding:20px 12px;
     }
 
-    .messages {
-        padding: 20px 12px;
+    .content{
+        max-width:85%;
     }
 
-    .content {
-        max-width: 85%;
+    .welcome{
+        margin-top:50px;
     }
 
-    .welcome {
-        margin-top: 50px;
+    .welcome h1{
+        font-size:27px;
     }
 
-    .welcome h1 {
-        font-size: 27px;
-    }
-
-    .input-area {
-        padding: 10px 10px 15px;
+    .input-area{
+        padding:10px 10px 15px;
     }
 }
 </style>
@@ -439,250 +397,207 @@ textarea::placeholder {
 
 <div class="app">
 
-    <aside class="sidebar">
+<aside class="sidebar">
 
-        <div class="brand">
-            <div class="logo">✦</div>
-            <div><span>JIL</span> AI</div>
+    <div class="brand">
+        <div class="logo">✦</div>
+        <div><span>JIL</span> AI</div>
+    </div>
+
+    <button class="new-chat" onclick="newChat()">
+        ＋ New chat
+    </button>
+
+    <div class="history-title">
+        Recent chats
+    </div>
+
+    <div id="history" class="history"></div>
+
+</aside>
+
+
+<main class="main">
+
+<header class="header">
+
+    <div class="header-left">
+
+        <div class="jil-avatar">🧠</div>
+
+        <div>
+            <div class="title">JIL AI</div>
+            <div class="status">● Online</div>
         </div>
 
-        <button class="new-chat" onclick="newChat()">
-            ＋ New chat
+    </div>
+
+    <a class="home" href="index.html">
+        ← Home
+    </a>
+
+</header>
+
+
+<section id="messages" class="messages">
+
+    <div id="welcome" class="welcome">
+
+        <div class="welcome-orb">🧠</div>
+
+        <h1>How can I help you today?</h1>
+
+        <p>
+            Ask JIL anything. Learn, explore, create and discover.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="input-area">
+
+    <div class="input-box">
+
+        <button
+            class="icon"
+            onclick="startVoice()"
+            title="Voice input">
+            🎙️
         </button>
 
-        <div class="history-title">
-            Recent chats
-        </div>
+        <textarea
+            id="userInput"
+            rows="1"
+            placeholder="Message JIL..."
+            oninput="resizeInput()"
+            onkeydown="handleKey(event)">
+        </textarea>
 
-        <div id="history" class="history"></div>
+        <button
+            class="icon send"
+            onclick="sendMessage()"
+            title="Send">
+            ➤
+        </button>
 
-    </aside>
+    </div>
 
+    <div class="footer-note">
+        JIL AI can make mistakes. Check important information.
+    </div>
 
-    <main class="main">
+</div>
 
-        <header class="header">
-
-            <div class="header-left">
-
-                <div class="jil-avatar">
-                    🧠
-                </div>
-
-                <div>
-                    <div class="title">JIL AI</div>
-                    <div class="status">● Online</div>
-                </div>
-
-            </div>
-
-            <a class="home" href="index.html">
-                ← Home
-            </a>
-
-        </header>
-
-
-        <section id="messages" class="messages">
-
-            <div id="welcome" class="welcome">
-
-                <div class="welcome-orb">
-                    🧠
-                </div>
-
-                <h1>How can I help you today?</h1>
-
-                <p>
-                    Ask JIL anything. Learn, explore, create and discover.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <div class="input-area">
-
-            <div class="input-box">
-
-                <button
-                    class="icon"
-                    onclick="startVoice()"
-                    title="Voice input">
-                    🎙️
-                </button>
-
-                <textarea
-                    id="userInput"
-                    rows="1"
-                    placeholder="Message JIL..."
-                    oninput="resizeInput()"
-                    onkeydown="handleKey(event)">
-                </textarea>
-
-                <button
-                    class="icon send"
-                    onclick="sendMessage()"
-                    title="Send">
-                    ➤
-                </button>
-
-            </div>
-
-            <div class="footer-note">
-                JIL AI can make mistakes. Check important information.
-            </div>
-
-        </div>
-
-    </main>
-
+</main>
 </div>
 
 
 <script>
 
-/* =========================
-   UTILITIES
-========================= */
-
-function timeNow() {
-
-    return new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
+function timeNow(){
+    return new Date().toLocaleTimeString([],{
+        hour:"2-digit",
+        minute:"2-digit"
     });
-
 }
 
 
-/* =========================
-   INPUT
-========================= */
+function resizeInput(){
 
-function resizeInput() {
+    const input=document.getElementById("userInput");
 
-    const input = document.getElementById("userInput");
+    input.style.height="auto";
 
-    input.style.height = "auto";
-
-    input.style.height =
-        Math.min(input.scrollHeight, 150) + "px";
-
+    input.style.height=
+        Math.min(input.scrollHeight,150)+"px";
 }
 
 
-function handleKey(event) {
+function handleKey(event){
 
-    if (event.key === "Enter" && !event.shiftKey) {
+    if(event.key==="Enter" && !event.shiftKey){
 
         event.preventDefault();
 
         sendMessage();
-
     }
-
 }
 
 
-/* =========================
-   MESSAGES
-========================= */
+function addMessage(type,text){
 
-function addMessage(type, text) {
+    const welcome=document.getElementById("welcome");
 
-    document.getElementById("welcome").style.display = "none";
+    if(welcome){
+        welcome.style.display="none";
+    }
 
-    const messages =
-        document.getElementById("messages");
+    const messages=document.getElementById("messages");
 
-    const message =
-        document.createElement("div");
+    const message=document.createElement("div");
 
-    message.className =
-        "message " + type;
+    message.className="message "+type;
 
-    const avatar =
-        document.createElement("div");
+    const avatar=document.createElement("div");
 
-    avatar.className = "avatar";
+    avatar.className="avatar";
 
-    avatar.textContent =
-        type === "jil" ? "🧠" : "👤";
+    avatar.textContent=
+        type==="jil" ? "🧠" : "👤";
 
-    const content =
-        document.createElement("div");
+    const content=document.createElement("div");
 
-    content.className = "content";
+    content.className="content";
 
-    const bubble =
-        document.createElement("div");
+    const bubble=document.createElement("div");
 
-    bubble.className = "bubble";
+    bubble.className="bubble";
 
-    bubble.textContent = text;
+    bubble.textContent=text;
 
-    const time =
-        document.createElement("div");
+    const time=document.createElement("div");
 
-    time.className = "time";
+    time.className="time";
 
-    time.textContent = timeNow();
+    time.textContent=timeNow();
 
     content.appendChild(bubble);
-
     content.appendChild(time);
 
     message.appendChild(avatar);
-
     message.appendChild(content);
 
     messages.appendChild(message);
 
-    messages.scrollTop =
-        messages.scrollHeight;
-
-    return bubble;
+    messages.scrollTop=messages.scrollHeight;
 }
 
 
-/* =========================
-   THINKING
-========================= */
+function showThinking(){
 
-function showThinking() {
+    const messages=document.getElementById("messages");
 
-    document.getElementById("welcome").style.display = "none";
+    const message=document.createElement("div");
 
-    const messages =
-        document.getElementById("messages");
+    message.className="message jil";
+    message.id="thinkingMessage";
 
-    const message =
-        document.createElement("div");
+    const avatar=document.createElement("div");
 
-    message.className = "message jil";
+    avatar.className="avatar";
+    avatar.textContent="🧠";
 
-    message.id = "thinkingMessage";
+    const content=document.createElement("div");
 
-    const avatar =
-        document.createElement("div");
+    content.className="content";
 
-    avatar.className = "avatar";
+    const bubble=document.createElement("div");
 
-    avatar.textContent = "🧠";
+    bubble.className="bubble";
 
-    const content =
-        document.createElement("div");
-
-    content.className = "content";
-
-    const bubble =
-        document.createElement("div");
-
-    bubble.className = "bubble";
-
-    bubble.innerHTML = `
+    bubble.innerHTML=`
         <div class="thinking">
             <span class="dot"></span>
             <span class="dot"></span>
@@ -693,120 +608,112 @@ function showThinking() {
     content.appendChild(bubble);
 
     message.appendChild(avatar);
-
     message.appendChild(content);
 
     messages.appendChild(message);
 
-    messages.scrollTop =
-        messages.scrollHeight;
+    messages.scrollTop=messages.scrollHeight;
 }
 
 
-function removeThinking() {
+function removeThinking(){
 
-    const thinking =
-        document.getElementById("thinkingMessage");
+    const thinking=document.getElementById("thinkingMessage");
 
-    if (thinking) {
+    if(thinking){
         thinking.remove();
     }
 }
 
 
-/* =========================
-   SEND MESSAGE
-========================= */
+async function sendMessage(){
 
-async function sendMessage() {
+    const input=document.getElementById("userInput");
 
-    const input =
-        document.getElementById("userInput");
+    const text=input.value.trim();
 
-    const text =
-        input.value.trim();
+    if(!text){
+        return;
+    }
 
-    if (!text) return;
+    addMessage("user",text);
 
-    addMessage("user", text);
-
-    input.value = "";
+    input.value="";
 
     resizeInput();
 
-    saveHistory();
-
     showThinking();
 
-    try {
+    try{
 
-        const response =
-            await fetch("/api/chat", {
-
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    message: text
-                })
-
-            });
+        const response=await fetch("/api/chat",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                message:text
+            })
+        });
 
 
-        const data =
-            await response.json();
+        const raw=await response.text();
 
-        removeThinking();
+        let data;
 
-
-        if (!response.ok) {
-
+        try{
+            data=JSON.parse(raw);
+        }catch{
             throw new Error(
-                data.error || "JIL could not respond."
+                "The server returned an invalid response."
             );
-
         }
 
 
-        addMessage(
-            "jil",
-            data.reply
-        );
+        if(!response.ok){
 
-        saveHistory();
+            throw new Error(
+                data.error ||
+                "The AI server returned an error."
+            );
+        }
 
 
-    } catch (error) {
+        if(!data.reply){
+
+            throw new Error(
+                "The AI server returned no reply."
+            );
+        }
+
 
         removeThinking();
 
+        addMessage("jil",data.reply);
+
+        saveHistory();
+
+    }catch(error){
+
+        removeThinking();
+
+        console.error("JIL ERROR:",error);
+
         addMessage(
             "jil",
-            "Sorry 😕 I couldn't connect to my AI brain right now."
+            "⚠️ JIL couldn't connect to the AI brain.\n\n" +
+            error.message
         );
-
-        console.error(error);
-
     }
-
 }
 
 
-/* =========================
-   NEW CHAT
-========================= */
+function newChat(){
 
-function newChat() {
-
-    document.getElementById("messages").innerHTML = `
+    document.getElementById("messages").innerHTML=`
         <div id="welcome" class="welcome">
 
-            <div class="welcome-orb">
-                🧠
-            </div>
+            <div class="welcome-orb">🧠</div>
 
             <h1>How can I help you today?</h1>
 
@@ -820,42 +727,33 @@ function newChat() {
     localStorage.removeItem("jilChatHistory");
 
     loadHistory();
-
 }
 
 
-/* =========================
-   HISTORY
-========================= */
+function saveHistory(){
 
-function saveHistory() {
+    const messages=document.querySelectorAll(
+        "#messages .message:not(#thinkingMessage)"
+    );
 
-    const messages =
-        document.querySelectorAll(
-            "#messages .message:not(#thinkingMessage)"
-        );
+    const history=[];
 
-    const history = [];
+    messages.forEach(message=>{
 
-    messages.forEach(message => {
-
-        const type =
+        const type=
             message.classList.contains("user")
-                ? "user"
-                : "jil";
+            ? "user"
+            : "jil";
 
-        const bubble =
-            message.querySelector(".bubble");
+        const bubble=message.querySelector(".bubble");
 
-        if (bubble) {
+        if(bubble){
 
             history.push({
-                type: type,
-                text: bubble.textContent
+                type:type,
+                text:bubble.textContent
             });
-
         }
-
     });
 
     localStorage.setItem(
@@ -864,102 +762,83 @@ function saveHistory() {
     );
 
     loadHistory();
-
 }
 
 
-function loadHistory() {
+function loadHistory(){
 
-    const historyElement =
+    const historyElement=
         document.getElementById("history");
 
-    if (!historyElement) return;
+    if(!historyElement){
+        return;
+    }
 
-    historyElement.innerHTML = "";
+    historyElement.innerHTML="";
 
-    const saved =
-        JSON.parse(
-            localStorage.getItem(
-                "jilChatHistory"
-            ) || "[]"
-        );
+    const saved=JSON.parse(
+        localStorage.getItem("jilChatHistory") || "[]"
+    );
 
-    const userMessages =
-        saved.filter(
-            item => item.type === "user"
-        );
-
-    userMessages
+    saved
+        .filter(item=>item.type==="user")
         .slice(-8)
         .reverse()
-        .forEach(item => {
+        .forEach(item=>{
 
-            const div =
-                document.createElement("div");
+            const div=document.createElement("div");
 
-            div.className =
-                "history-item";
+            div.className="history-item";
 
-            div.textContent =
-                item.text;
+            div.textContent=item.text;
 
             historyElement.appendChild(div);
-
         });
-
 }
 
 
-/* =========================
-   VOICE INPUT
-========================= */
+function startVoice(){
 
-function startVoice() {
-
-    const SpeechRecognition =
+    const SpeechRecognition=
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
 
-    if (!SpeechRecognition) {
+    if(!SpeechRecognition){
 
         alert(
             "Voice input is not supported in this browser."
         );
 
         return;
-
     }
 
-    const recognition =
-        new SpeechRecognition();
+    const recognition=new SpeechRecognition();
 
-    recognition.lang = "en-US";
+    recognition.lang="en-US";
 
-    recognition.interimResults = false;
+    recognition.interimResults=false;
+
+    recognition.onresult=function(event){
+
+        const text=
+            event.results[0][0].transcript;
+
+        const input=
+            document.getElementById("userInput");
+
+        input.value=text;
+
+        resizeInput();
+    };
+
+    recognition.onerror=function(){
+
+        alert("I couldn't hear that. Please try again.");
+    };
 
     recognition.start();
-
-    recognition.onresult =
-        function(event) {
-
-            const text =
-                event.results[0][0].transcript;
-
-            const input =
-                document.getElementById("userInput");
-
-            input.value = text;
-
-            resizeInput();
-
-        };
-
 }
 
-
-/* =========================
-   START
-========================= */
 
 loadHistory();
 
